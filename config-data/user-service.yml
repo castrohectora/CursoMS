@@ -1,6 +1,3 @@
 server:
   port: 8001
 
-spring:
-  datasource:
-    url: jdbc:h2:mem:user-service;NON_KEYWORDS=USER
