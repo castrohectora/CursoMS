@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 9090
 eureka:
   client:
     fetch-registry: true
@@ -12,6 +12,8 @@ eureka:
 spring:
   cloud:
     gateway:
+      default-filters:
+        -TokenRelay
       discovery:
         locator:
           enabled: true
@@ -20,6 +22,8 @@ spring:
           uri: lb://user-service
           predicates:
             - Path=/user/**
+          filters:
+            - RemoveRequestHeader=Cookie
         - id: car-service
           uri: lb://car-service
           predicates:
@@ -28,3 +32,20 @@ spring:
           uri: lb://bike-service
           predicates:
             - Path=/bike/**
+  
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            authorization-uri: http://localhost:8080/realms/tutorial-realm/protocol/openid-connect/auth
+            userinfo-uri: http://localhost:8080/realms/tutorial-realm/protocol/openid-connect/userinfo
+            user-name-attribute: preferred_username
+            token-uri: http://localhost:8080/realms/tutorial-realm/protocol/openid-connect/token
+        registration:
+          client-name: tutorial-client
+            provider: keycloak
+            client-id: tutorial-client
+            client-secret: 2754ced4-0819-4655-b551-bbac7e58006a #eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5YzhmZWExNS1hMzMxLTQ4NTItYmQ0NC0zMDFmZjk1ODY4MzUifQ.eyJleHAiOjE5MjAxMzg2ODYsImlhdCI6MTY2MDkzODY4NiwianRpIjoiMjc1NGNlZDQtMDgxOS00NjU1LWI1NTEtYmJhYzdlNTgwMDZhIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy90dXRvcmlhbC1yZWFsbSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MC9yZWFsbXMvdHV0b3JpYWwtcmVhbG0iLCJ0eXAiOiJJbml0aWFsQWNjZXNzVG9rZW4ifQ.NQorMmlpD0iCUEsn9qNUVz-gIWp_3RvFQJjx8wkqPp0
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/tutorial-client"
