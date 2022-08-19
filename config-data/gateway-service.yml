@@ -43,9 +43,10 @@ spring:
             user-name-attribute: preferred_username
             token-uri: http://localhost:8080/realms/tutorial-realm/protocol/openid-connect/token
         registration:
-          client-name: tutorial-client
+          keycloak: tutorial-client
             provider: keycloak
             client-id: tutorial-client
             client-secret: 2754ced4-0819-4655-b551-bbac7e58006a #eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5YzhmZWExNS1hMzMxLTQ4NTItYmQ0NC0zMDFmZjk1ODY4MzUifQ.eyJleHAiOjE5MjAxMzg2ODYsImlhdCI6MTY2MDkzODY4NiwianRpIjoiMjc1NGNlZDQtMDgxOS00NjU1LWI1NTEtYmJhYzdlNTgwMDZhIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy90dXRvcmlhbC1yZWFsbSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MC9yZWFsbXMvdHV0b3JpYWwtcmVhbG0iLCJ0eXAiOiJJbml0aWFsQWNjZXNzVG9rZW4ifQ.NQorMmlpD0iCUEsn9qNUVz-gIWp_3RvFQJjx8wkqPp0
             authorization-grant-type: authorization_code
             redirect-uri: http://localhost:8080/login/oauth2/code/tutorial-client
+          

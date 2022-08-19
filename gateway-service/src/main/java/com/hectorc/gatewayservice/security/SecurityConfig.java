@@ -15,6 +15,7 @@ public class SecurityConfig {
     public SecurityWebFilterChain filterChain(ServerHttpSecurity http) {
         http.authorizeExchange().anyExchange().authenticated().and().oauth2Login(Customizer.withDefaults());
         http.csrf().disable();
+        http.oauth2Client().clientRegistrationRepository();
 
         return http.build();
     }
