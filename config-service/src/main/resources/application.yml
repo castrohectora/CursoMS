@@ -5,7 +5,7 @@ spring:
     config:
       server:
         git:
-          default-label: keylcloak
+          default-label: keycloak
           uri: https://github.com/castrohectora/CursoMS
           search-paths: config-data
   application:
