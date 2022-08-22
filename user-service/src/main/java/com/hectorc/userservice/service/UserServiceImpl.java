@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<Car> getCars(int userId) {
+
         return restTempate.exchange(
                 "http://car-service:8002/car/byuser/" + userId,
                 HttpMethod.GET,
@@ -59,6 +60,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<Bike> getBikes(int userId) {
+
         return restTempate.exchange(
                 "http://bike-service:8003/bike/byuser/" + userId,
                 HttpMethod.GET,
