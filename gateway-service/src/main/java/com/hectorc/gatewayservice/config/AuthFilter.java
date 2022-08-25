@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 
 
 @Component
-public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter> {
+public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config> {
 
     private WebClient.Builder webClient;
 
@@ -23,7 +23,7 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter> {
 
     }
     @Override
-    public GatewayFilter apply(AuthFilter config) {
+    public GatewayFilter apply(Config config) {
         return (((exchange, chain) -> {
             if (exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
                 return onError(exchange, HttpStatus.BAD_REQUEST);
