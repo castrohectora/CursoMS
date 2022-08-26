@@ -1,15 +1,16 @@
 package com.hectorc.authservice.security;
 
+import com.hectorc.authservice.dto.RequestDto;
 import com.hectorc.authservice.entity.AuthUser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.Base64;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -18,16 +19,19 @@ public class JwtProvider {
     @Value("${jwt.secret}")
     private String secret;
 
+    @Autowired
+    private RouteValidator routeValidator;
+
     @PostConstruct
     protected void init() {
         secret = Base64.getEncoder().encodeToString(secret.getBytes());
     }
 
     public String getToken(AuthUser authUser) {
-        Map<String, Object> claims = new HashMap<>();
-
-        claims = Jwts.claims().setSubject(authUser.getUserName());
+        Map<String, Object> claims = Jwts.claims().setSubject(authUser.getUserName());
         claims.put("id", authUser.getId());
+        claims.put("role", authUser.getRole());
+
         Date now = new Date();
         Date exp = new Date(now.getTime() + 3600000);
 
@@ -39,13 +43,14 @@ public class JwtProvider {
                 .compact();
     }
 
-    public boolean validate(String token) {
+    public boolean validate(String token, RequestDto dto) {
         try {
             Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
-            return true;
         } catch (Exception e) {
             return false;
         }
+
+        return !(!isAdmin(token) && routeValidator.isAdminPath(dto));
     }
 
     public String getUserNameFromToken(String token) {
@@ -56,5 +61,8 @@ public class JwtProvider {
         }
     }
 
+    private boolean isAdmin(String token) {
+        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().get("role").equals("admin");
+    }
 
 }

@@ -1,6 +1,8 @@
 package com.hectorc.authservice.controller;
 
 import com.hectorc.authservice.dto.AuthUserDto;
+import com.hectorc.authservice.dto.NewUserDto;
+import com.hectorc.authservice.dto.RequestDto;
 import com.hectorc.authservice.dto.TokenDto;
 import com.hectorc.authservice.entity.AuthUser;
 import com.hectorc.authservice.service.AuthUserService;
@@ -27,8 +29,8 @@ public class AuthUserController {
     }
 
     @PostMapping("/validate")
-    public ResponseEntity<TokenDto> validate(@RequestParam String token) {
-        TokenDto tokenDto = userService.validate(token);
+    public ResponseEntity<TokenDto> validate(@RequestParam String token, @RequestBody RequestDto dto) {
+        TokenDto tokenDto = userService.validate(token, dto);
 
         if (tokenDto == null) {
             return ResponseEntity.badRequest().build();
@@ -38,7 +40,7 @@ public class AuthUserController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<AuthUser> create(@RequestBody AuthUserDto dto) {
+    public ResponseEntity<AuthUser> create(@RequestBody NewUserDto dto) {
         AuthUser authUser = userService.save(dto);
 
         if (authUser == null) {

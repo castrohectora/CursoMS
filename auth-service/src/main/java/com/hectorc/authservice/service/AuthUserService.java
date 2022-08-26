@@ -1,6 +1,8 @@
 package com.hectorc.authservice.service;
 
 import com.hectorc.authservice.dto.AuthUserDto;
+import com.hectorc.authservice.dto.NewUserDto;
+import com.hectorc.authservice.dto.RequestDto;
 import com.hectorc.authservice.dto.TokenDto;
 import com.hectorc.authservice.entity.AuthUser;
 import com.hectorc.authservice.repository.AuthUserRepository;
@@ -23,7 +25,7 @@ public class AuthUserService {
     @Autowired
     JwtProvider jwtProvider;
 
-    public AuthUser save(AuthUserDto dto) {
+    public AuthUser save(NewUserDto dto) {
         Optional<AuthUser> user = userRepository.findByUserName(dto.getUserName());
 
         if (user.isPresent()) {
@@ -34,6 +36,7 @@ public class AuthUserService {
         AuthUser authUser = AuthUser.builder()
                 .userName(dto.getUserName())
                 .password(password)
+                .role(dto.getRole())
                 .build();
 
         return userRepository.save(authUser);
@@ -53,8 +56,8 @@ public class AuthUserService {
         return null;
     }
 
-    public TokenDto validate(String token) {
-        if (!jwtProvider.validate(token)) {
+    public TokenDto validate(String token, RequestDto dto) {
+        if (!jwtProvider.validate(token, dto)) {
             return null;
         }
 
