@@ -44,11 +44,11 @@ spring:
     zipkin: http://localhost:9411
 
   datasource:
-    url: jdbc:mysql://localhost:3306/users?useSLL=false&serverTimezone=UTC&useLegacyDateTimeCode=false
+    url: jdbc:mysql://localhost:3306/users?verifyServerCertificate?=false&useSLL=false&serverTimezone=UTC&useLegacyDateTimeCode=false
 
     #username and password de la base de datos
     username: root
-    password: 90ch0la9ant3ra
+    password: #90ch0la9ant3ra
 
   #Mostrar SQL queries que se realizan
   jpa:
