@@ -43,22 +43,22 @@ spring:
   application:
     zipkin: http://localhost:9411
 
-#  datasource:
-#    url: jdbc:mysql://localhost:3306/users?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&useLegacyDateTimeCode=false
-#
-#    #username and password de la base de datos
-#    username: root
-#    password: #90ch0la9ant3ra
-#
-#  #Mostrar SQL queries que se realizan
-#  jpa:
-#    show-sql: true
-#
-#    #Actualiza la base de datos y crea la entidad
-#    hibernate:
-#      ddl-auto: update
-#
-#    #generate optimization hibernate SQL
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.MySQL5Dialect
+  datasource:
+    url: jdbc:mysql://localhost:3306/users?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&useLegacyDateTimeCode=false
+
+    #username and password de la base de datos
+    username: root
+    password: titanic2200
+
+  #Mostrar SQL queries que se realizan
+  jpa:
+    show-sql: true
+
+    #Actualiza la base de datos y crea la entidad
+    hibernate:
+      ddl-auto: update
+
+    #generate optimization hibernate SQL
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
