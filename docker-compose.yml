@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+  database:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/var/lib/mysql:/var/lib/mysql
+    environment:
+      MYSQL_USER: app
+      MYSQL_PASSWORD: app2021
+      MYSQL_DATABASE: catalogo
+      MYSQL_ROOT_PASSWORD: titanic2200
+  configserver:
+    build: ./config-server
+    image: configserver:latest
+    ports:
+      - "8888:8888"
+    environment:
+      CONFIG_GIT_URI: https://github.com/castrohectora/CursoMS/config-data
+      CONFIG_GIT_LABEL: config-server
+  servicediscovery:
+    build: ./servicediscovery
+    image: servicediscovery:latest
+    ports:
+      - "8090:8090"
+    depends_on:
+      - "configserver"
+    environment:
+      DISCOVERY_HOST: servicediscovery
+      DISCOVERY_PORT: 8090
+      CONFIG_HOST: configserver
+      CONFIG_PORT: 8888
+      WAIT_HOSTS: configserver:8888
+  catalogo:
+    build: ./catalogo
+    image: catalogo:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - "database"
+      - "configserver"
+    environment:
+      DB_SERVER: database
+      DB_NAME: catalogo
+      DB_USER: app
+      DB_PASSWD: app2021
+      DISCOVERY_HOST: servicediscovery
+      DISCOVERY_PORT: 8090
+      CONFIG_HOST: configserver
+      CONFIG_PORT: 8888
+      WAIT_HOSTS: configserver:8888, database:3306, servicediscovery:8090

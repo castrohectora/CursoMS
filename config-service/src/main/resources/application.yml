@@ -1,13 +1,13 @@
 server:
-  port: 8081
+  port: 8888
 spring:
   cloud:
     config:
       server:
         git:
-          default-label: config-server
-          uri: https://github.com/castrohectora/CursoMS
-          search-paths: config-data
+          default-label: ${CONFIG_GIT_LABEL:config-server}
+          uri: ${CONFIG_GIT_URI:https://github.com/castrohectora/CursoMS/config-data}
+          refreshRate: 30
   application:
     name: config-service
 

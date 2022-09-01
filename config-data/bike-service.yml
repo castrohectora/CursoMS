@@ -5,9 +5,17 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      default-zone: http://localhost:8761/eureka
+      defaultZone: http://${DISCOVERY_HOST:localhost}:${DISCOVERY_PORT:8090}/eureka
   instance:
     instance-id: ${spring.application.name}:${spring.instance_id:${random.value}}
+
 spring:
-  application:
-    zipkin: http://localhost:9411
+  datasource:
+    url: jdbc:mysql://${DB_SERVER:localhost}:3306/${DB_NAME:db}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DB_USER:user}
+    password: ${DB_PASSWD:pass}
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true

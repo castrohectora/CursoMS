@@ -5,7 +5,7 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      default-zone: http://localhost:8761/eureka
+      defaultZone: http://${DISCOVERY_HOST:localhost}:${DISCOVERY_PORT:8090}/eureka
   instance:
     instance-id: ${spring.application.name}:${spring.instance_id:${random.value}}
 
@@ -40,25 +40,12 @@ resilience4j.circuitbreaker:
             eventConsumerBufferSize: 10
 
 spring:
-  application:
-    zipkin: http://localhost:9411
-
   datasource:
-    url: jdbc:mysql://localhost:3306/users?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC&useLegacyDateTimeCode=false
-
-    #username and password de la base de datos
-    username: root
-    password: titanic2200
-
-  #Mostrar SQL queries que se realizan
+    url: jdbc:mysql://${DB_SERVER:localhost}:3306/${DB_NAME:db}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DB_USER:user}
+    password: ${DB_PASSWD:pass}
   jpa:
     show-sql: true
-
-    #Actualiza la base de datos y crea la entidad
-    hibernate:
-      ddl-auto: update
-
-    #generate optimization hibernate SQL
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true

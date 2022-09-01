@@ -1,13 +1,13 @@
 server:
-  port: 8080
+  port: ${PORT:${SERVER_PORT:0}}
 eureka:
   client:
     fetch-registry: true
     register-with-eureka: true
     service-url:
-      default-zone: http://localhost:8761/eureka
+      defaultZone: http://${DISCOVERY_HOST:localhost}:${DISCOVERY_PORT:8090}/eureka
   instance:
-    hostname: localhost
+    instance-id: ${DISCOVERY_HOST:localhost}
 
 spring:
   cloud:
