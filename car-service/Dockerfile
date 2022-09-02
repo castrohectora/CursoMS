@@ -1,4 +1,4 @@
-FROM openjdk:11-jdk-alpine
+FROM openjdk:11
 EXPOSE 8083
 ADD build/libs/*.jar /app.jar
 RUN apk update && apk add tzdata

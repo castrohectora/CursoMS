@@ -14,7 +14,7 @@ services:
       MYSQL_DATABASE: catalogo
       MYSQL_ROOT_PASSWORD: titanic2200
   configserver:
-    build: ./config-server
+    build: ./config-service
     image: configserver:latest
     ports:
       - "8888:8888"
@@ -58,8 +58,8 @@ services:
     environment:
       DB_SERVER: database
       DB_NAME: catalogo
-      DB_USER: app
-      DB_PASSWD: app2021
+      DB_USER: root
+      DB_PASSWD: titanic2200
       DISCOVERY_HOST: servicediscovery
       DISCOVERY_PORT: 8090
       CONFIG_HOST: configserver
