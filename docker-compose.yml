@@ -21,6 +21,8 @@ services:
     environment:
       CONFIG_GIT_URI: https://github.com/castrohectora/CursoMS/config-data
       CONFIG_GIT_LABEL: config-server
+    links:
+      - eureka-service
   eureka-service:
     build: ./eureka-service
     image: eureka-service:latest
