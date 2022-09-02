@@ -22,7 +22,7 @@ services:
       CONFIG_GIT_URI: https://github.com/castrohectora/CursoMS/config-data
       CONFIG_GIT_LABEL: config-server
   servicediscovery:
-    build: ./servicediscovery
+    build: ./eureka-service
     image: servicediscovery:latest
     ports:
       - "8090:8090"
@@ -34,11 +34,24 @@ services:
       CONFIG_HOST: configserver
       CONFIG_PORT: 8888
       WAIT_HOSTS: configserver:8888
-  catalogo:
-    build: ./catalogo
-    image: catalogo:latest
+  gateway:
+    build: ./gateway-service
+    image: gateway:latest
     ports:
       - "8080:8080"
+    depends_on:
+      - "configserver"
+    environment:
+      DISCOVERY_HOST: servicediscovery
+      DISCOVERY_PORT: 8090
+      CONFIG_HOST: configserver
+      CONFIG_PORT: 8888
+      WAIT_HOSTS: configserver:8888, servicediscovery:8090
+  user-service:
+    build: ./user-service
+    image: user-service:latest
+    ports:
+      - "8081:8081"
     depends_on:
       - "database"
       - "configserver"
