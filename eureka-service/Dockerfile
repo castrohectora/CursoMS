@@ -1,5 +1,5 @@
 FROM openjdk:11
-EXPOSE 8090
+EXPOSE 8761
 ADD build/libs/*.jar /app.jar
 # RUN apk update && apk add tzdata
 ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.9.0/wait /wait

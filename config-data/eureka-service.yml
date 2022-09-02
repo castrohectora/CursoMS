@@ -1,8 +1,8 @@
 server:
-  port: 8090
+  port: 8761
 eureka:
   client:
     fetch-registry: false
     register-with-eureka: false
     service-url: 
-      default-zone: http://${DISCOVERY_HOST:localhost}:${DISCOVERY_PORT:8090}/eureka
+      default-zone: http://${DISCOVERY_HOST:localhost}:${DISCOVERY_PORT:8761}/eureka
