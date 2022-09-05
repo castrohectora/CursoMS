@@ -5,8 +5,9 @@ spring:
     config:
       server:
         git:
-          default-label: ${CONFIG_GIT_LABEL:config-server}
-          uri: ${CONFIG_GIT_URI:https://github.com/castrohectora/CursoMS/config-data}
+          default-label: ${CONFIG_GIT_LABEL:config-server-docker}
+          uri: ${CONFIG_GIT_URI:https://github.com/castrohectora/CursoMS}
+          search-paths: config-data
           refreshRate: 30
   application:
     name: config-service
