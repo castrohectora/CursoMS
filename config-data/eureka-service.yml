@@ -1,13 +1,8 @@
 eureka:
   client:
-    fetch-registry: false
-    register-with-eureka: false
-    service-url: 
-      default-zone: http://${DISCOVERY_HOST}:${DISCOVERY_PORT:8761}/eureka
-  instance:
-    hostname: ${DISCOVERY_HOST}
-    prefer-ip-address: true
-  server:
-    enable-self-preservation: false
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${DISCOVERY_HOST:localhost}:${DISCOVERY_PORT:8761}/eureka
 
 
