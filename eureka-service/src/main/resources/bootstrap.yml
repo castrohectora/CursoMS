@@ -8,4 +8,4 @@ spring:
       enabled: true
       uri: http://${CONFIG_HOST}:${CONFIG_PORT}
   config:
-    import: optional:config-service:http://${CONFIG_HOST}:${CONFIG_PORT}
+    import: config-service:http://${CONFIG_HOST}:${CONFIG_PORT}
