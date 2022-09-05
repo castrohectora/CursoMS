@@ -9,6 +9,3 @@ spring:
           uri: ${CONFIG_GIT_URI:https://github.com/castrohectora/CursoMS}
           search-paths: config-data
           refreshRate: 30
-  application:
-    name: config-service
-
