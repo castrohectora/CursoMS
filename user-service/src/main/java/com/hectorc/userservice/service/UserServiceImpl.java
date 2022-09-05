@@ -50,8 +50,9 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<Car> getCars(int userId) {
+
         return restTempate.exchange(
-                "http://localhost:8002/car/byuser/" + userId,
+                "http://car-service:8002/car/byuser/" + userId,
                 HttpMethod.GET,
                 new HttpEntity<>(null, null),
                 new ParameterizedTypeReference<List<Car>>() {
@@ -59,8 +60,9 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<Bike> getBikes(int userId) {
+
         return restTempate.exchange(
-                "http://localhost:8003/bike/byuser/" + userId,
+                "http://bike-service:8003/bike/byuser/" + userId,
                 HttpMethod.GET,
                 new HttpEntity<>(null, null),
                 new ParameterizedTypeReference<List<Bike>>() {
