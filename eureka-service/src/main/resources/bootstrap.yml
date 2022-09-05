@@ -9,3 +9,25 @@ spring:
       uri: http://${CONFIG_HOST}:${CONFIG_PORT}
   config:
     import: optional:config-service:http://${CONFIG_HOST}:${CONFIG_PORT}
+
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      default-zone: http://${DISCOVERY_HOST}:${DISCOVERY_PORT:8761}/eureka
+  instance:
+    hostname: ${DISCOVERY_HOST}
+    prefer-ip-address: true
+  server:
+    enable-self-preservation: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: ALWAIS

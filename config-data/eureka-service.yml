@@ -7,3 +7,16 @@ eureka:
   instance:
     hostname: ${DISCOVERY_HOST}
     prefer-ip-address: true
+  server:
+    enable-self-preservation: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-details: ALWAIS
+
