@@ -6,6 +6,8 @@ spring:
       server:
         git:
           default-label: ${CONFIG_GIT_LABEL:config-server-docker}
-          uri: ${CONFIG_GIT_URI:https://github.com/castrohectora/CursoMS/tree/config-server-docker/config-data}
-
+          uri: ${CONFIG_GIT_URI:https://github.com/castrohectora/CursoMS}
+          searchPaths: config-data
           refreshRate: 30
+          username: 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
+          password:
