@@ -19,8 +19,8 @@ services:
     ports:
       - "8888:8888"
     environment:
-      CONFIG_GIT_URI: https://github.com/castrohectora/CursoMS/tree/main/config-data
-      CONFIG_GIT_LABEL: main
+      CONFIG_GIT_URI: https://github.com/castrohectora/CursoMS/tree/config-server-docker/config-data
+      CONFIG_GIT_LABEL: config-server-docker
   eureka-service:
     build: ./eureka-service
     image: eureka-service:latest
