@@ -10,8 +10,8 @@ services:
       - ./data/var/lib/mysql:/var/lib/mysql
     environment:
       MYSQL_USER: app
-      MYSQL_PASSWORD: app2021
-      MYSQL_DATABASE: catalogo
+      MYSQL_PASSWORD: app2022
+      MYSQL_DATABASE: ejemploMS
       MYSQL_ROOT_PASSWORD: passroot
   configservice:
     build: ./config-service
@@ -44,9 +44,9 @@ services:
       - "configservice"
     environment:
       DB_SERVER: database
-      DB_NAME: catalogo
+      DB_NAME: ejemploMS
       DB_USER: root
-      DB_PASSWD: titanic2200
+      DB_PASSWD: passroot
       DISCOVERY_HOST: eurekaservice
       DISCOVERY_PORT: 8761
       CONFIG_HOST: configservice
@@ -62,7 +62,7 @@ services:
       - "configservice"
     environment:
       DB_SERVER: database
-      DB_NAME: catalogo
+      DB_NAME: ejemploMS
       DB_USER: root
       DB_PASSWD: passroot
       DISCOVERY_HOST: eurekaservice
@@ -80,7 +80,7 @@ services:
       - "configservice"
     environment:
       DB_SERVER: database
-      DB_NAME: catalogo
+      DB_NAME: ejemploMS
       DB_USER: root
       DB_PASSWD: passroot
       DISCOVERY_HOST: eurekaservice
