@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: gateway-service
+    name: gatewayservice
   cloud:
     config:
       enabled: true

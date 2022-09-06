@@ -13,56 +13,56 @@ services:
       MYSQL_PASSWORD: app2021
       MYSQL_DATABASE: catalogo
       MYSQL_ROOT_PASSWORD: titanic2200
-  config-service:
-    build: ./config-service
-    image: config-service:latest
+  configservice:
+    build: ./configservice
+    image: configservice:latest
     ports:
       - "8888:8888"
     environment:
       CONFIG_GIT_URI: https://github.com/castrohectora/CursoMS/tree/config-server-docker/config-data
       CONFIG_GIT_LABEL: config-server-docker
-  eureka-service:
-    build: ./eureka-service
-    image: eureka-service:latest
+  eurekaservice:
+    build: ./eurekaservice
+    image: eurekaservice:latest
     ports:
       - "8761:8761"
     depends_on:
-      - "config-service"
+      - "configservice"
     environment:
-      DISCOVERY_HOST: eureka-service
+      DISCOVERY_HOST: eurekaservice
       DISCOVERY_PORT: 8761
-      CONFIG_HOST: config-service
+      CONFIG_HOST: configservice
       CONFIG_PORT: 8888
-      WAIT_HOSTS: config-service:8888
+      WAIT_HOSTS: configservice:8888
   user-service:
-    build: ./user-service
-    image: user-service:latest
+    build: ./userservice
+    image: userservice:latest
     ports:
       - "8081:8081"
     depends_on:
       - "database"
-      - "config-service"
+      - "configservice"
     environment:
       DB_SERVER: database
       DB_NAME: catalogo
       DB_USER: root
       DB_PASSWD: titanic2200
-      DISCOVERY_HOST: eureka-service
+      DISCOVERY_HOST: eurekaservice
       DISCOVERY_PORT: 8761
-      CONFIG_HOST: config-service
+      CONFIG_HOST: configservice
       CONFIG_PORT: 8888
-      WAIT_HOSTS: config-service:8888,database:3306,eureka-service:8761
+      WAIT_HOSTS: configservice:8888,database:3306,eurekaservice:8761
   gateway:
-    build: ./gateway-service
+    build: ./gatewayservice
     image: gateway:latest
     ports:
       - "8080:8080"
     depends_on:
-      - "config-service"
-      - "eureka-service"
+      - "configservice"
+      - "eurekaservice"
     environment:
-      DISCOVERY_HOST: eureka-service
+      DISCOVERY_HOST: eurekaservice
       DISCOVERY_PORT: 8761
-      CONFIG_HOST: config-service
+      CONFIG_HOST: configservice
       CONFIG_PORT: 8888
-      WAIT_HOSTS: config-service:8888, eureka-service:8761
+      WAIT_HOSTS: configservice:8888, eurekaservice:8761

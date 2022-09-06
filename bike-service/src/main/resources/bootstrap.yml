@@ -1,6 +1,6 @@
 spring:
   application:
-    name: bike-service
+    name: bikeservice
   cloud:
     config:
       enabled: true
