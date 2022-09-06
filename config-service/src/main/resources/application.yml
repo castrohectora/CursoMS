@@ -9,5 +9,5 @@ spring:
           uri: ${CONFIG_GIT_URI:https://github.com/castrohectora/CursoMS}
           searchPaths: config-data
           refreshRate: 30
-          username: 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
+          username: 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
           password:
