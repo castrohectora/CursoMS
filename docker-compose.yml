@@ -14,7 +14,7 @@ services:
       MYSQL_DATABASE: catalogo
       MYSQL_ROOT_PASSWORD: titanic2200
   configservice:
-    build: ./configservice
+    build: ./config-service
     image: configservice:latest
     ports:
       - "8888:8888"
@@ -22,7 +22,7 @@ services:
       CONFIG_GIT_URI: https://github.com/castrohectora/CursoMS/tree/config-server-docker/config-data
       CONFIG_GIT_LABEL: config-server-docker
   eurekaservice:
-    build: ./eurekaservice
+    build: ./eureka-service
     image: eurekaservice:latest
     ports:
       - "8761:8761"
@@ -35,7 +35,7 @@ services:
       CONFIG_PORT: 8888
       WAIT_HOSTS: configservice:8888
   user-service:
-    build: ./userservice
+    build: ./user-service
     image: userservice:latest
     ports:
       - "8081:8081"
@@ -53,7 +53,7 @@ services:
       CONFIG_PORT: 8888
       WAIT_HOSTS: configservice:8888,database:3306,eurekaservice:8761
   gateway:
-    build: ./gatewayservice
+    build: ./gateway-service
     image: gateway:latest
     ports:
       - "8080:8080"
