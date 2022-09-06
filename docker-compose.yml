@@ -12,15 +12,15 @@ services:
       MYSQL_USER: app
       MYSQL_PASSWORD: app2021
       MYSQL_DATABASE: catalogo
-      MYSQL_ROOT_PASSWORD: titanic2200
+      MYSQL_ROOT_PASSWORD: passroot
   configservice:
     build: ./config-service
     image: configservice:latest
     ports:
       - "8888:8888"
     environment:
-      CONFIG_GIT_URI: https://github.com/castrohectora/CursoMS/tree/config-server-docker/config-data
-      CONFIG_GIT_LABEL: config-server-docker
+      CONFIG_GIT_URI: https://github.com/castrohectora/config-data
+      CONFIG_GIT_LABEL: main
   eurekaservice:
     build: ./eureka-service
     image: eurekaservice:latest
