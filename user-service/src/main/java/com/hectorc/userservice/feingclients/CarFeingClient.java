@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "car-service", path = "/car")
+@FeignClient(name = "carservice", path = "/car")
 public interface CarFeingClient {
 
     @PostMapping()
