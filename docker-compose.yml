@@ -45,8 +45,8 @@ services:
     environment:
       DB_SERVER: database
       DB_NAME: ejemploMS
-      DB_USER: root
-      DB_PASSWD: passroot
+      DB_USER: app
+      DB_PASSWD: app2022
       DISCOVERY_HOST: eurekaservice
       DISCOVERY_PORT: 8761
       CONFIG_HOST: configservice
@@ -63,8 +63,8 @@ services:
     environment:
       DB_SERVER: database
       DB_NAME: ejemploMS
-      DB_USER: root
-      DB_PASSWD: passroot
+      DB_USER: app
+      DB_PASSWD: app2022
       DISCOVERY_HOST: eurekaservice
       DISCOVERY_PORT: 8761
       CONFIG_HOST: configservice
@@ -81,8 +81,8 @@ services:
     environment:
       DB_SERVER: database
       DB_NAME: ejemploMS
-      DB_USER: root
-      DB_PASSWD: passroot
+      DB_USER: app
+      DB_PASSWD: app2022
       DISCOVERY_HOST: eurekaservice
       DISCOVERY_PORT: 8761
       CONFIG_HOST: configservice
